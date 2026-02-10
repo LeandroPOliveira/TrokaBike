@@ -11,7 +11,7 @@ import json
 from cart.cart import Cart
 
 
-def login(request):
+def login_usuario(request):
     form = LoginForms()
 
     if request.method == 'POST':
@@ -43,84 +43,122 @@ def login(request):
     return render(request, 'usuarios/login.html', {"form": form})
 
 
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from .forms import CadastroForm
+from django.contrib.auth import authenticate, login
+
+
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from .forms import CadastroForm
+
+
 def cadastro(request):
-    form = CadastroForm()
+
     if request.method == 'POST':
         form = CadastroForm(request.POST)
 
         if form.is_valid():
-            form.save()
 
-            usuario = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
+            # salva usuário
+            user = form.save()
 
+            # autentica
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
 
-            if User.objects.filter(username=usuario).exists():
-                messages.error(request, 'Usuário já cadastrado')
-                return redirect('cadastro')
-
-            usuario = User.objects.create_user(
-                username=nome,
-                email=email,
-                password=senha
+            user = authenticate(
+                request,
+                username=username,
+                password=password
             )
 
-            usuario.save()
-            messages.success(request, 'Cadastro realizado com sucesso!')
-            return redirect('login')
+            # login automático
+            login(request, user)
+
+            messages.success(request, 'Conta criada e login realizado!')
+            return redirect('index')  # ajuste rota
+
+    else:
+        form = CadastroForm()
 
     return render(request, 'usuarios/cadastro.html', {'form': form})
 
 
+
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.models import User
+
+
+@login_required
 def perfil(request):
     if request.user.is_authenticated:
-        current_user = User.objects.get(id=request.user.id)
-        current_profile = Profile.objects.get(usuario__id=request.user.id)
+
+        current_user = request.user
+        current_profile = Profile.objects.get(usuario=request.user)
 
         user_form = PerfilForm(request.POST or None, instance=current_user)
         perfil_form = UserInfoForm(request.POST or None, instance=current_profile)
 
-        usuario_envio = Endereco.objects.get(usuario__id=request.user.id)
-        endereco_form = EnderecoForm(request.POST or None, instance=usuario_envio)
+        if request.method == 'POST':
+            if user_form.is_valid() and perfil_form.is_valid():
+                user_form.save()
+                perfil_form.save()
 
-        if user_form.is_valid() and perfil_form.is_valid():
-            user_form.save()
-            perfil_form.save()
+                messages.success(request, "Perfil atualizado!")
+                return redirect('perfil')
 
-            login(request)
-            messages.success(request, "User Has Been Updated!!")
-            return redirect('index')
-        return render(request, "usuarios/perfil.html", {'user_form': user_form, 'perfil_form': perfil_form, 'endereco_form': endereco_form})
-    else:
-        messages.success(request, "You Must Be Logged In To Access That Page!!")
-        return redirect('index')
+        return render(request, "usuarios/perfil.html", {
+            'user_form': user_form,
+            'perfil_form': perfil_form
+        })
 
+    messages.warning(request, "Faça login para acessar o perfil")
+    return redirect('index')
+
+
+
+
+from django.contrib.auth import update_session_auth_hash
 
 def nova_senha(request):
     if request.user.is_authenticated:
+
         current_user = request.user
-        # Did they fill out the form
+
         if request.method == 'POST':
             form = NovaSenhaForm(current_user, request.POST)
-            # Is the form valid
+
             if form.is_valid():
                 form.save()
-                messages.success(request, "Your Password Has Been Updated...")
-                login(request)
-                return redirect('nova_senha')
+
+                # ⭐ mantém sessão válida
+                update_session_auth_hash(request, current_user)
+
+                messages.success(request, "Your password has been updated!")
+                return redirect('perfil')
+
             else:
-                for error in list(form.errors.values()):
+                for error in form.errors.values():
                     messages.error(request, error)
-                    return redirect('nova_senha')
+
         else:
             form = NovaSenhaForm(current_user)
-            return render(request, "usuarios/nova-senha.html", {'form':form})
+
+        return render(request, "usuarios/nova-senha.html", {'form': form})
+
     else:
-        messages.success(request, "You Must Be Logged In To View That Page...")
+        messages.success(request, "You must be logged in.")
         return redirect('index')
 
 
-def logout(request):
+
+def logout_usuario(request):
     auth.logout(request)
     messages.success(request, 'Logout efetuado com sucesso!')
     return redirect('login')

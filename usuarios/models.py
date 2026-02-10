@@ -1,7 +1,7 @@
 from django.db import models
-import datetime
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Profile(models.Model):
@@ -10,7 +10,7 @@ class Profile(models.Model):
         verbose_name_plural = 'Perfil'
 
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    data_modificacao = models.DateTimeField(User, auto_now=True)
+    data_modificacao = models.DateTimeField(auto_now=True)
     telefone = models.CharField(max_length=20, blank=True)
     endereco = models.CharField(max_length=200, blank=True)
     cidade = models.CharField(max_length=200, blank=True)
@@ -21,13 +21,11 @@ class Profile(models.Model):
         return self.usuario.username
 
 
+@receiver(post_save, sender=User)
 def criar_perfil(sender, instance, created, **kwargs):
     if created:
-        user_profile = Profile(user=instance)
-        user_profile.save()
+        Profile.objects.create(usuario=instance)
 
-
-post_save.connect(criar_perfil, sender=User)
 
 
 

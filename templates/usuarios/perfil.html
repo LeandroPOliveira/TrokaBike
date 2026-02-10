@@ -2,34 +2,39 @@
 {% load static %}
 {% block content %}
 
-<div class="cadastro-fundo">
+
+<div class="perfil-bg d-flex align-items-center cadastro-fundo">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6 p-5 my-5 bg-light rounded">
-                <h2 class="text-center mb-5">Perfil</h2>
+
+            <div class="col-md-6 my-5 perfil-card">
+
+                <h2 class="text-center mb-5 perfil-titulo">Meu Perfil</h2>
+
                 <form action="{% url 'perfil' %}" method="POST">
                     {% csrf_token %}
 
+                    <h5 class="mt-3">Dados do Usuário</h5>
                     {{ user_form.as_p }}
 
+                    <h5 class="mt-4">Informações Pessoais</h5>
                     {{ perfil_form.as_p }}
 
-                    {{ endereco_form.as_p }}
-
-                    <button type="submit" class="btn btn-primary mt-3">Atualizar</button>
+                    <button type="submit" class="btn btn-primary btn-block mt-4">
+                        Atualizar Dados
+                    </button>
                 </form>
 
-                <br /><br />
-                <a href="{% url 'nova_senha' %}" class="btn btn-secondary">Trocar senha</a>
+                <div class="text-center mt-3">
+                    <a href="{% url 'nova_senha' %}" class="btn btn-secondary">
+                        Trocar senha
+                    </a>
+                </div>
+
             </div>
+
         </div>
     </div>
 </div>
-<!-- Include Bootstrap JS and jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 
 {% endblock %}

@@ -5,29 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c121e1bd-5181-45ab-9e21-a66e0b4f0263" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/payment/templates/checkout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/setup/static/css/perfil.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bikes/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/bikes/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bikes/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/bikes/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bikes/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bikes/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bikes/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bikes/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart/cart.py" beforeDir="false" afterPath="$PROJECT_DIR$/cart/cart.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart/templates/cart_sumario.html" beforeDir="false" afterPath="$PROJECT_DIR$/cart/templates/cart_sumario.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cart/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/templates/pagamento_sucesso.html" beforeDir="false" afterPath="$PROJECT_DIR$/payment/templates/pagamento_sucesso.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/setup/static/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup/static/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/setup/static/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bikes/detalhes_bike.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bikes/detalhes_bike.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bikes/editar_bike.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bikes/editar_bike.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bikes/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bikes/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/bikes/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bikes/template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/_alertas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/_alertas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/usuarios/cadastro.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/usuarios/cadastro.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/usuarios/perfil.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/usuarios/perfil.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,20 +35,25 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 1
+}]]></component>
   <component name="ProjectId" id="2TS4GnDq0PMNI3i2HKgLQsV4h5m" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/leand/PycharmProjects/trokabike&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/leand/PycharmProjects/trokabike",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\leand\PycharmProjects\trokabike\cart\templates" />
@@ -69,9 +61,32 @@
       <recent name="C:\Users\leand\PycharmProjects\Pagina-web\templates\bikes" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.manage">
+  <component name="RunManager" selected="Python.SAP Script - IW32">
+    <configuration name="SAP Script - IW32" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Pagina-web" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../adopet/SAP-Scripting" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../adopet/SAP-Scripting/SAP Script - IW32.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="admin" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Pagina-web" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -94,6 +109,7 @@
     </configuration>
     <configuration name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Pagina-web" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -115,15 +131,24 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.manage" />
+      <item itemvalue="Python.SAP Script - IW32" />
       <item itemvalue="Python.admin" />
+      <item itemvalue="Python.manage" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.SAP Script - IW32" />
         <item itemvalue="Python.manage" />
         <item itemvalue="Python.admin" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-41e8cd69c857-64d779b69b7a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.26927.90" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -135,5 +160,16 @@
       <updated>1691023054931</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
