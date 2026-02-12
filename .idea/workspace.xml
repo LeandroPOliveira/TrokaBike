@@ -5,16 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c121e1bd-5181-45ab-9e21-a66e0b4f0263" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/setup/static/css/perfil.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bikes/criar_produto.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bikes/meus_produtos.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/bikes/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/bikes/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/bikes/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/migrations/0002_bikes_categoria_alter_bikes_preco.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/migrations/0003_bikes_data_fotografia_bikes_publicada.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/migrations/0004_bikes_foto.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/migrations/0005_bikes_usuarios.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/migrations/0006_alter_bikes_data_fotografia_alter_bikes_descricao.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/migrations/0007_alter_bikes_options_alter_bikes_categoria_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/migrations/0008_rename_bikes_produto.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bikes/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bikes/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bikes/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bikes/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/migrations/0002_alter_endereco_options_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/migrations/0003_pedido_itempedido.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup/static/css/perfil.css" beforeDir="false" afterPath="$PROJECT_DIR$/setup/static/css/perfil.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup/static/img/slidermtb.png" beforeDir="false" afterPath="$PROJECT_DIR$/setup/static/img/slidermtb.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bikes/detalhes_bike.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bikes/detalhes_bike.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bikes/editar_bike.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bikes/editar_produto.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bikes/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bikes/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/bikes/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bikes/template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/usuarios/perfil.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/usuarios/perfil.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/migrations/0002_profile_old_cart.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/migrations/0003_alter_profile_options.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/migrations/0004_alter_profile_data_modificacao.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,25 +55,26 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2TS4GnDq0PMNI3i2HKgLQsV4h5m" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/leand/PycharmProjects/trokabike",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/leand/PycharmProjects/trokabike&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\leand\PycharmProjects\trokabike\cart\templates" />

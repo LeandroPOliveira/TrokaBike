@@ -117,51 +117,32 @@
 
     <div class="container row g-4 mx-auto">
         {% if cards %}
-        {% for bike in cards %}
+        {% for produto in cards %}
         <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="rounded position-relative fruite-item">
                 <div class="fruite-img">
-                    <a href="{% url 'detalhes_bike' bike.id %}">
-                        {% if bike.foto == "" or bike.foto == null %}
+                    <a href="{% url 'detalhes_produto' produto.id %}">
+                        {% if produto.foto == "" or produto.foto == null %}
                         <img class='card-img-top' src="{% static '/img/not-found.jpg' %}">
                         {% else %}
-                        <img class="img-fluid w-100" src="{{bike.foto.url}}">
+                        <img class="img-fluid w-100" src="{{produto.foto.url}}">
                         {% endif %}
                     </a>
                 </div>
                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
-                    {{ bike.categoria|title }}</div>
+                    {{ produto.categoria|title }}</div>
                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                    <h4>{{ bike.nome }}</h4>
-                    <p>{{ bike.descricao }}</br>{{ bike.cor }}</br>{{ bike.ano }}</p>
+                    <h4>{{ produto.nome }}</h4>
+                    <p>{{ produto.descricao }}</br>{{ produto.cor }}</br>{{ produto.ano }}</p>
                     <div class="d-flex justify-content-between flex-lg-wrap">
-                        <p class="text-dark fs-5 fw-bold mb-0">R$ {{ bike.preco }}</p>
+                        <p class="text-dark fs-5 fw-bold mb-0">R$ {{ produto.preco }}</p>
                         <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
                                 class="fa fa-shopping-bag me-2 text-primary"></i> Comprar</a>
                     </div>
                 </div>
             </div>
         </div>
-        <!--        <div class="col-md-6 col-xl-4">-->
-        <!--            <div class="card border border-primary rounded mx-3 mb-3">-->
-        <!--                <a href="{% url 'detalhes_bike' bike.id %}">-->
-        <!--                    {% if bike.foto == "" or bike.foto == null %}-->
-        <!--                    <img class='card-img-top' src="{% static '/img/not-found.jpg' %}">-->
-        <!--                    {% else %}-->
-        <!--                    <img class="img-fluid w-100" src="{{bike.foto.url}}">-->
-        <!--                    {% endif %}-->
-        <!--                </a>-->
-        <!--                <div class="card-body">-->
-        <!--                    <h5 class="card-title">{{ bike.nome }}</h5>-->
-        <!--                    <p class="card-text">{{ bike.descricao }}</p>-->
-        <!--                </div>-->
-        <!--                <ul class="list-group list-group-flush">-->
-        <!--                    <li class="list-group-item">{{ bike.cor }}</li>-->
-        <!--                    <li class="list-group-item">{{ bike.ano }}</li>-->
-        <!--                    <li class="list-group-item">{{ bike.preco | floatformat:2 }}</li>-->
-        <!--                </ul>-->
-        <!--            </div>-->
-        <!--        </div>-->
+
         {% endfor %}
         {% else %}
         {% endif %}

@@ -3,8 +3,11 @@ from django.urls import path
 from . import views
 urlpatterns = [
     path('', views.index, name='index'),
-    path('editar-bike', views.editar_bike, name='editar_bike'),
-    path('detalhes-bike/<int:bike_id>', views.detalhes_bike, name='detalhes_bike'),
-    path('filtro/<str:categoria>', views.filtro, name='filtro')
+    path('novo-produto/', views.criar_produto, name='criar_produto'),
+    path('editar-produto/<int:id>', views.editar_produto, name='editar_produto'),
+    path('meus-produtos/', views.meus_produtos, name='meus_produtos'),
+    path('detalhes-bike/<int:id>', views.detalhes_produto, name='detalhes_produto'),
+    path('filtro/<str:categoria>', views.filtro, name='filtro'),
+
 ]
 

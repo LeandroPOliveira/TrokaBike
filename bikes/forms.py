@@ -4,6 +4,7 @@ from datetime import datetime
 
 
 class ProdutoForm(forms.ModelForm):
+
     class Meta:
         model = Produto
         exclude = ['publicada', ]
@@ -31,3 +32,7 @@ class ProdutoForm(forms.ModelForm):
             'usuarios': forms.Select(attrs={'class': 'form-control'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'

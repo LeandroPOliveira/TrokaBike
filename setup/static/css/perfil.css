@@ -1,5 +1,6 @@
 /* ---------- Fundo da página ---------- */
 .cadastro-fundo {
+    position: relative;          /* ESSENCIAL */
     min-height: 100vh;
     background-image: url("/static/img/back2.jpg");
     background-size: cover;
@@ -7,16 +8,22 @@
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
+    z-index: 0;
 }
 
 
-/* Overlay escuro suave para melhorar leitura */
 .cadastro-fundo::before {
     content: "";
     position: absolute;
     inset: 0;
     background: rgba(0,0,0,0.45);
+    pointer-events: none;   /* ⭐⭐ SUPER IMPORTANTE */
     z-index: 0;
+}
+
+.perfil-card {
+    position: relative;
+    z-index: 1;
 }
 
 .container {

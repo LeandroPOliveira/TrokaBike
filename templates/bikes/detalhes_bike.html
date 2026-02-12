@@ -2,17 +2,23 @@
 {% load static %}
 {% block content %}
 
-<div class="container my-5">
-    <div class="row">
-        <div class="col-md-8">
-            <img src="{{ bike.foto.url }}" class="img-fluid" alt="Product Image">
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-md-8">
+                    {% if produto.foto %}
+            <img class="img-fluid" src="{{ produto.foto.url }}">
+        {% else %}
+            <div class="no-image">
+                🚲 Imagem não disponível
+            </div>
+        {% endif %}
         </div>
         <div class="col-md-4">
-            <h2>{{ bike.nome }}</h2>
-            <p><strong>Categoria:</strong> {{ bike.categoria }}</p>
-            <p><strong>Cor:</strong> {{ bike.cor }}</p>
-            <p><strong>Preço:</strong> {{ bike.preco }}</p>
-            <p><strong>Descrição:</strong> {{ bike.descricao }}</p>
+            <h2>{{ produto.nome }}</h2>
+            <p><strong>Categoria:</strong> {{ produto.categoria }}</p>
+            <p><strong>Cor:</strong> {{ produto.cor }}</p>
+            <p><strong>Preço:</strong> {{ produto.preco }}</p>
+            <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
             <div class="col-md-2">Quantidade:</div>
 
             <select class="form-select form-select-sm" id="qty-cart">
@@ -23,7 +29,7 @@
                 <option value="5">5</option>
             </select>
             <br>
-            <button type="button" value="{{ bike.id }}" class="btn btn-secondary" id="add-cart">Adicionar ao carrinho</button>
+            <button type="button" value="{{ produto.id }}" class="btn btn-secondary" id="add-cart">Adicionar ao carrinho</button>
         </div>
 
     </div>
