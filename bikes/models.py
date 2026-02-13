@@ -13,7 +13,6 @@ class Produto(models.Model):
     OPCOES_CATEGORIA = [
         ('MOUNTAIN', "Mountain"),
         ('ROAD', 'Road'),
-        ('ROAD', 'Road'),
         ('GRAVEL', 'Gravel'),
         ('VESTUARIO', 'Vestuario')
     ]

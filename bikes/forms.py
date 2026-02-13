@@ -7,11 +7,11 @@ class ProdutoForm(forms.ModelForm):
 
     class Meta:
         model = Produto
-        exclude = ['publicada', ]
+        exclude = ['publicada', 'usuarios']
         labels = {
             'descricao': 'Descrição',
             'data_fotografia': 'Data de registro',
-            'usuarios': 'Usuário',
+
         }
 
         widgets = {
