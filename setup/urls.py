@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from products.views import product_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('bikes.urls')),
-    path('', include('usuarios.urls')),
+    path('users/', include('users.urls')),
     path('cart/', include('cart.urls')),
-    path('', include('payment.urls')),
+    path('payment/', include('payment.urls')),
+    path('', include('products.urls')),  # Home pública
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

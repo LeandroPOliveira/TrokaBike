@@ -1,20 +1,53 @@
 from django import forms
-from .models import Endereco
+from .models import Address
 
 
-class EnderecoForm(forms.ModelForm):
-    usuario_envio = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Full Name'}), required=True)
-    email_envio = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}), required=True)
-    endereco_envio = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Address1'}), required=True)
-    endereco_envio2 = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Address2'}), required=False)
-    cidade_envio = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'City'}), required=True)
-    estado_envio = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'State'}), required=False)
-    cep_envio = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Zipcode'}), required=False)
-    pais_envio = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Country'}), required=True)
+class AddressForm(forms.ModelForm):
 
     class Meta:
-        model = Endereco
-        fields = ['usuario_envio', 'email_envio', 'endereco_envio', 'endereco_envio2', 'cidade_envio', 'estado_envio',
-                  'cep_envio', 'pais_envio']
+        model = Address
+        fields = [
+            "full_name",
+            "email",
+            "address_line_1",
+            "address_line_2",
+            "city",
+            "state",
+            "postal_code",
+            "country",
+        ]
 
-        exclude = ['usuario',]
+        widgets = {
+            "full_name": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Full Name"
+            }),
+            "email": forms.EmailInput(attrs={
+                "class": "form-control",
+                "placeholder": "Email"
+            }),
+            "address_line_1": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Address Line 1"
+            }),
+            "address_line_2": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Address Line 2"
+            }),
+            "city": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "City"
+            }),
+            "state": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "State"
+            }),
+            "postal_code": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Postal Code"
+            }),
+            "country": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Country"
+            }),
+        }

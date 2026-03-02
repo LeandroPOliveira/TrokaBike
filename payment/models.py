@@ -1,47 +1,123 @@
 from django.db import models
 from django.contrib.auth.models import User
-from bikes.models import Produto
+from products.models import Product
 
 
-class Endereco(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    email_envio = models.CharField(max_length=255)
-    endereco_envio = models.CharField(max_length=255)
-    endereco_envio2 = models.CharField(max_length=255)
-    cidade_envio = models.CharField(max_length=255)
-    estado_envio = models.CharField(max_length=255, null=True, blank=True)
-    cep_envio = models.CharField(max_length=255, null=True, blank=True)
-    pais_envio = models.CharField(max_length=255)
+# -----------------------------
+# Address Model
+# -----------------------------
 
-    # Don't pluralize address
+class Address(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255)
+
+    address_line_1 = models.CharField(max_length=255)
+    address_line_2 = models.CharField(max_length=255, blank=True)
+
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255, blank=True)
+    postal_code = models.CharField(max_length=20, blank=True)
+    country = models.CharField(max_length=255)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
     class Meta:
-        verbose_name_plural = "Endereço Entrega"
+        verbose_name_plural = "Addresses"
 
     def __str__(self):
-        return f'Endereço Entrega - {str(self.id)}'
+        return f"{self.full_name} - {self.city}"
 
 
-class Pedido(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    nome_completo = models.CharField(max_length=250)
-    email = models.EmailField(max_length=250)
-    endereco_envio = models.TextField(max_length=15000)
-    valor_pago = models.DecimalField(max_digits=7, decimal_places=2)
-    data_envio = models.DateTimeField(auto_now_add=True)
+# -----------------------------
+# Order Status Choices
+# -----------------------------
+
+class OrderStatus(models.TextChoices):
+    PENDING = "pending", "Pending"
+    PAID = "paid", "Paid"
+    CANCELED = "canceled", "Canceled"
+
+
+# -----------------------------
+# Order Model
+# -----------------------------
+
+class Order(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    address = models.ForeignKey(
+        Address,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="orders"
+    )
+
+    total_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=OrderStatus.choices,
+        default=OrderStatus.PENDING
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'Order - {str(self.id)}'
+        return f"Order #{self.id} - {self.status}"
+
+    def get_total_items(self):
+        return sum(item.quantity for item in self.items.all())
 
 
-class ItemPedido(models.Model):
-    # Foreign Keys
-    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, null=True)
-    produto = models.ForeignKey(Produto, on_delete=models.CASCADE, null=True)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+# -----------------------------
+# Order Item Model
+# -----------------------------
 
-    quantidade = models.PositiveBigIntegerField(default=1)
-    preco = models.DecimalField(max_digits=7, decimal_places=2)
+class OrderItem(models.Model):
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE,
+        related_name="items"
+    )
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.SET_NULL,
+        null=True
+    )
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    quantity = models.PositiveIntegerField(default=1)
+
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
 
     def __str__(self):
-        return f'Item pedido - {str(self.id)}'
+        return f"Item {self.id} - Order #{self.order.id}"
 
+    def get_subtotal(self):
+        return self.price * self.quantity

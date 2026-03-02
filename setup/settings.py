@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bikes.apps.BikesConfig',
-    'usuarios.apps.UsuariosConfig',
+    'products.apps.ProductsConfig',
+    'users.apps.UsersConfig',
     'cart.apps.CartConfig',
     'payment',
 ]

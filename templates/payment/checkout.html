@@ -1,0 +1,70 @@
+{% extends 'template.html' %}
+
+
+{% block content %}
+
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Checkout</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Confira seu Pedido...</p>
+        </div>
+    </div>
+</header>
+<br/>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    Resumo do Pedido
+                </div>
+                <div class="card-body">
+                    {% for item in cart_items %}
+                    {% with product=item.product %}
+                    {{ product.name }}:
+                    {% if product.is_sale %}
+                    ${{ product.sale_price }}
+                    {% else %}
+                    ${{ product.price }}
+                    {% endif %}
+
+                    <br/>
+                    <small>Quantidade: {{ item.quantity }}</small>
+                    <br/><br/>
+                    {% endwith %}
+                    {% endfor %}
+                    Total: ${{ total }}
+                    <br/><br/>
+                    <a href="{% url 'cart_detail' %}" class="btn btn-sm btn-outline-secondary">Atualizar Itens</a>
+                </div>
+            </div>
+            <br/><br/>
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="card">
+                    <div class="card-header">
+                        Shipping Info
+                    </div>
+                    <div class="card-body">
+                        {{ form.as_p }}
+                    </div>
+                </div>
+
+                <br>
+
+                <button type="submit" class="btn btn-success">
+                    Finalizar Pedido
+                </button>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

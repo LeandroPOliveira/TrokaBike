@@ -1,0 +1,38 @@
+{% extends 'bikes/template.html' %}
+
+{% block content %}
+
+<header class="bg-dark py-5">
+    <div class="container text-center text-white">
+        <h1 class="display-4 fw-bolder">Pedido Confirmado 🎉</h1>
+        <p class="lead text-white-50">
+            Sua compra foi realizada com sucesso!
+        </p>
+    </div>
+</header>
+
+<div class="container mt-5 text-center">
+
+    <div class="card shadow p-5">
+
+        <h3>Obrigado pela sua compra!</h3>
+
+        <p class="mt-3">
+            Seu pedido foi registrado com sucesso.
+        </p>
+
+        <div class="mt-4">
+            <a href="{% url 'meus_pedidos' %}" class="btn btn-primary">
+                Ver Meus Pedidos
+            </a>
+
+            <a href="{% url 'index' %}" class="btn btn-outline-secondary">
+                Continuar Comprando
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

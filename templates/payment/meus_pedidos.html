@@ -1,0 +1,43 @@
+{% extends 'bikes/template.html' %}
+
+{% block content %}
+
+<header class="bg-dark py-5">
+    <div class="container text-center text-white">
+        <h1>Meus Pedidos</h1>
+    </div>
+</header>
+
+<div class="container mt-5">
+
+{% if pedidos %}
+
+    {% for pedido in pedidos %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5>Pedido #{{ pedido.id }}</h5>
+            <span class="badge bg-warning">{{ pedido.status }}</span>
+            <p>Data: {{ pedido.data_envio }}</p>
+            <p>Total: ${{ pedido.valor_pago }}</p>
+
+            <hr>
+
+            <h6>Itens:</h6>
+            {% for item in pedido.itempedido_set.all %}
+                {{ item.produto.nome }} —
+                Quantidade: {{ item.quantidade }} —
+                ${{ item.preco }}
+                <br>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endfor %}
+
+{% else %}
+    <p>Você ainda não possui pedidos.</p>
+{% endif %}
+
+</div>
+
+{% endblock %}

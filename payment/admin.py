@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Endereco, Pedido, ItemPedido
+from .models import Address, Order, OrderItem
 
 
 # Register the model on the admin section thing
-admin.site.register(Endereco)
-admin.site.register(Pedido)
-admin.site.register(ItemPedido)
+admin.site.register(Address)
+admin.site.register(Order)
+admin.site.register(OrderItem)

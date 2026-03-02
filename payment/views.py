@@ -1,32 +1,73 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from cart.cart import Cart
-from payment.forms import EnderecoForm
-from payment.models import Endereco
+from payment.forms import AddressForm
+from payment.models import Order, OrderItem
 
 
 def checkout(request):
-    # Get the cart
     cart = Cart(request)
-    cart_produtos = cart.pega_produto
-    quantidade = cart.pega_quantidade
-    totais = cart.cart_total()
 
-    if request.user.is_authenticated:
-        # Checkout as logged in user
-        # Shipping User
-        shipping_user = Endereco.objects.get(usuario__id=request.user.id)
-        # Shipping Form
-        shipping_form = EnderecoForm(request.POST or None, instance=shipping_user)
-        return render(request, "checkout.html",
-                      {"cart_produtos": cart_produtos, "quantidade": quantidade, "totais": totais,
-                       "shipping_form": shipping_form})
+    cart_items = cart.get_cart_items()
+    total = cart.get_total_price()
+
+    if not cart_items:
+        messages.warning(request, "Your cart is empty.")
+        return redirect("cart_detail")
+
+    if request.method == "POST":
+        form = AddressForm(request.POST)
+
+        if form.is_valid():
+            order = Order.objects.create(
+                user=request.user if request.user.is_authenticated else None,
+                full_name=form.cleaned_data["full_name"],
+                email=form.cleaned_data["email"],
+                address_line_1=form.cleaned_data["address_line_1"],
+                address_line_2=form.cleaned_data["address_line_2"],
+                city=form.cleaned_data["city"],
+                state=form.cleaned_data["state"],
+                postal_code=form.cleaned_data["postal_code"],
+                country=form.cleaned_data["country"],
+                total_amount=total,
+            )
+
+            for item in cart_items:
+                OrderItem.objects.create(
+                    order=order,
+                    product=item["product"],
+                    user=request.user if request.user.is_authenticated else None,
+                    quantity=item["quantity"],
+                    price=item["product"].price,
+                )
+
+            cart.clear()
+
+            messages.success(request, "Order placed successfully!")
+            return redirect("payment_success")
+
     else:
-        # Checkout as guest
-        shipping_form = EnderecoForm(request.POST or None)
-        return render(request, "checkout.html",
-                      {"cart_produto": cart_produto, "quantidade": quantidade, "totais": totais,
-                       "shipping_form": shipping_form})
+        form = AddressForm()
 
+    return render(
+        request,
+        "payment/checkout.html",
+        {
+            "cart_items": cart_items,
+            "total": total,
+            "form": form,
+        },
+    )
 
-def pagamento_sucesso(request):
-    return render(request, 'pagamento_sucesso.html', {})
+def payment_success(request):
+    return render(request, "payment/payment_success.html")
+
+@login_required
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user).order_by("-created_at")
+
+    return render(request, "payment/my_orders.html", {
+        "orders": orders
+    })

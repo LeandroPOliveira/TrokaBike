@@ -1,63 +1,82 @@
 from django.shortcuts import render, get_object_or_404
-from .cart import Cart
-from bikes.models import Produto
 from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 
+from .cart import Cart
+from products.models import Product
 
-def cart_sumario(request):
+
+def cart_detail(request):
+    """
+    Display cart summary page.
+    """
     cart = Cart(request)
-    cart_produtos = cart.pega_produto
-    quantidade = cart.pega_quantidade
-    totais = cart.cart_total()
-    return render(request, 'cart_sumario.html', {'cart_produtos': cart_produtos, 'quantidade': quantidade, 'totais': totais})
+
+    context = {
+        "cart_items": cart.get_cart_items(),
+        "totals": cart.get_total_price(),
+    }
+
+    return render(request, "cart/cart_detail.html", context)
 
 
-def cart_adicionar(request):
-    # Get the cart
+@require_POST
+def cart_add(request):
+    """
+    Add a product to the cart.
+    """
     cart = Cart(request)
-    # test for POST
-    if request.POST.get('action') == 'post':
-        # Get stuff
-        product_id = int(request.POST.get('product_id'))
-        product_qty = int(request.POST.get('product_qty'))
 
-        # lookup product in DB
-        product = get_object_or_404(Produto, id=product_id)
+    try:
+        product_id = int(request.POST.get("product_id"))
+        quantity = int(request.POST.get("product_qty", 1))
+    except (TypeError, ValueError):
+        return JsonResponse({"error": "Invalid data"}, status=400)
 
-        # Save to session
-        cart.adicionar(product=product, quantity=product_qty)
+    product = get_object_or_404(Product, id=product_id)
 
-        # Get Cart Quantity
-        cart_quantity = cart.__len__()
+    cart.add(product=product, quantity=quantity)
 
-        # Return resonse
-        # response = JsonResponse({'Product Name: ': product.name})
-        response = JsonResponse({'qty': cart_quantity})
-        messages.success(request, ("Produto adicionado ao carrinho!"))
-        return response
+    messages.success(request, "Product added to cart.")
+
+    return JsonResponse({"qty": len(cart)})
 
 
-def cart_deletar(request):
+@require_POST
+def cart_remove(request):
+    """
+    Remove a product from the cart.
+    """
     cart = Cart(request)
-    if request.POST.get('action') == 'post':
-        product_id = int(request.POST.get('product_id'))
-        cart.deletar(produto=product_id)
-        response = JsonResponse({'product': product_id})
-        messages.success(request, ("Item removido do carrinho!"))
-        return response
+
+    try:
+        product_id = int(request.POST.get("product_id"))
+    except (TypeError, ValueError):
+        return JsonResponse({"error": "Invalid data"}, status=400)
+
+    cart.remove(product_id=product_id)
+
+    messages.success(request, "Item removed from cart.")
+
+    return JsonResponse({"product_id": product_id})
 
 
-def cart_atualizar(request):
+@require_POST
+def cart_update(request):
+    """
+    Update product quantity in the cart.
+    """
     cart = Cart(request)
-    if request.POST.get('action') == 'post':
 
-        product_id = int(request.POST.get('product_id'))
-        product_qty = int(request.POST.get('product_qty'))
+    try:
+        product_id = int(request.POST.get("product_id"))
+        quantity = int(request.POST.get("product_qty"))
+    except (TypeError, ValueError):
+        return JsonResponse({"error": "Invalid data"}, status=400)
 
-        cart.atualizar(produto=product_id, quantidade=product_qty)
-        response = JsonResponse({'qty': product_qty})
-        messages.success(request, ("Seu carrinho foi atualizado!"))
-        return response
-        # return redirect('cart_sumario')
+    cart.update(product_id=product_id, quantity=quantity)
 
+    messages.success(request, "Cart updated successfully.")
+
+    return JsonResponse({"qty": quantity})
