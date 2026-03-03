@@ -21,16 +21,17 @@ def checkout(request):
         form = AddressForm(request.POST)
 
         if form.is_valid():
+
+            address = form.save(commit=False)
+
+            if request.user.is_authenticated:
+                address.user = request.user
+
+            address.save()
+
             order = Order.objects.create(
                 user=request.user if request.user.is_authenticated else None,
-                full_name=form.cleaned_data["full_name"],
-                email=form.cleaned_data["email"],
-                address_line_1=form.cleaned_data["address_line_1"],
-                address_line_2=form.cleaned_data["address_line_2"],
-                city=form.cleaned_data["city"],
-                state=form.cleaned_data["state"],
-                postal_code=form.cleaned_data["postal_code"],
-                country=form.cleaned_data["country"],
+                address=address,
                 total_amount=total,
             )
 
@@ -46,8 +47,8 @@ def checkout(request):
             cart.clear()
 
             messages.success(request, "Order placed successfully!")
-            return redirect("payment_success")
 
+            return redirect("payment_success")
     else:
         form = AddressForm()
 
@@ -60,6 +61,8 @@ def checkout(request):
             "form": form,
         },
     )
+
+
 
 def payment_success(request):
     return render(request, "payment/payment_success.html")

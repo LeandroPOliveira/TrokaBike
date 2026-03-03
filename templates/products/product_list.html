@@ -5,162 +5,166 @@
 
 <main>
 
-<!-- HERO -->
+    <!-- HERO -->
 
-<section class="hero">
+    <section class="hero">
 
-    <div class="hero-overlay">
+        <div class="hero-overlay">
 
-        <div class="container hero-content">
+            <div class="container hero-content">
 
-            <h1>Performance sobre duas rodas</h1>
+                <h1>Performance sobre duas rodas</h1>
 
-            <p>
-                Bikes de alta performance para estrada, trilha e aventura
-            </p>
-
-            <a href="#produtos" class="btn-hero">
-                Explorar Bikes
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- CATEGORIAS -->
-
-<section class="container categorias">
-
-    <h2 class="section-title">Categorias</h2>
-
-    <div class="categorias-grid">
-
-        <a href="{% url 'products:product_by_category' 'MOUNTAIN' %}" class="categoria-card">
-
-            <img src="{% static 'img/slidermtb.png' %}">
-
-            <div class="categoria-label">Mountain</div>
-
-        </a>
-
-        <a href="{% url 'products:product_by_category' 'ROAD' %}" class="categoria-card">
-
-            <img src="{% static 'img/sliderroad.png' %}">
-
-            <div class="categoria-label">Road</div>
-
-        </a>
-
-        <a href="{% url 'products:product_by_category' 'GRAVEL' %}" class="categoria-card">
-
-            <img src="{% static 'img/slidergravel.png' %}">
-
-            <div class="categoria-label">Gravel</div>
-
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- MARCAS -->
-
-<section class="marcas-section">
-
-    <div class="marquee">
-
-        <ul class="marquee-content">
-
-            <li><img src="{% static 'img/canyon-1.svg' %}"></li>
-
-            <li>
-                <img src="https://upload.wikimedia.org/wikipedia/en/5/52/Specialized_logo.svg">
-            </li>
-
-            <li>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/2018_Trek_logo_word_mark_wiki.svg">
-            </li>
-
-            <li><img src="{% static 'img/scott-7.svg' %}"></li>
-
-            <li><img src="{% static 'img/cannondale-3.svg' %}"></li>
-
-            <li><img src="{% static 'img/pinarello-1.svg' %}"></li>
-
-            <li><img src="{% static 'img/cervelo-1.svg' %}"></li>
-
-            <li><img src="{% static 'img/colnago-logo-1.svg' %}"></li>
-
-        </ul>
-
-    </div>
-
-</section>
-
-
-<!-- PRODUTOS -->
-
-<section id="produtos" class="container produtos">
-
-    <h2 class="section-title">Nossos Produtos</h2>
-
-    <div class="produtos-grid">
-
-        {% if page_obj %}
-        {% for produto in page_obj %}
-
-        <div class="product-card">
-
-            <a href="{% url 'products:product_detail' produto.slug %}">
-
-                {% if produto.image %}
-                <img src="{{ produto.image.url }}" class="product-img">
-                {% else %}
-                <img src="{% static 'img/not-found.jpg' %}" class="product-img">
-                {% endif %}
-
-            </a>
-
-            <div class="product-info">
-
-                <span class="product-category">
-                    {{ produto.category|title }}
-                </span>
-
-                <h3 class="product-name">
-                    {{ produto.name }}
-                </h3>
-
-                <p class="product-specs">
-                    {{ produto.color }} • {{ produto.year }}
+                <p>
+                    Bikes de alta performance para estrada, trilha e aventura
                 </p>
 
-                <div class="product-bottom">
-
-                    <span class="product-price">
-                        R$ {{ produto.price }}
-                    </span>
-
-                    <a href="#" class="btn-buy">
-                        Comprar
-                    </a>
-
-                </div>
+                <a href="#produtos" class="btn-hero">
+                    Explorar Bikes
+                </a>
 
             </div>
 
         </div>
 
-        {% endfor %}
-        {% endif %}
+    </section>
 
-    </div>
 
-</section>
+    <!-- CATEGORIAS -->
+
+    <section class="container categorias">
+
+        <h2 class="section-title">Categorias</h2>
+
+        <div class="categorias-grid">
+
+            <a href="{% url 'products:product_by_category' 'MOUNTAIN' %}" class="categoria-card">
+
+                <img src="{% static 'img/slidermtb.png' %}">
+
+                <div class="categoria-label">Mountain</div>
+
+            </a>
+
+            <a href="{% url 'products:product_by_category' 'ROAD' %}" class="categoria-card">
+
+                <img src="{% static 'img/sliderroad.png' %}">
+
+                <div class="categoria-label">Road</div>
+
+            </a>
+
+            <a href="{% url 'products:product_by_category' 'GRAVEL' %}" class="categoria-card">
+
+                <img src="{% static 'img/slidergravel.png' %}">
+
+                <div class="categoria-label">Gravel</div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- MARCAS -->
+
+    <section class="marcas-section">
+
+        <div class="marquee">
+
+            <ul class="marquee-content">
+
+                <li><img src="{% static 'img/canyon-1.svg' %}"></li>
+
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/5/52/Specialized_logo.svg">
+                </li>
+
+                <li>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/2018_Trek_logo_word_mark_wiki.svg">
+                </li>
+
+                <li><img src="{% static 'img/scott-7.svg' %}"></li>
+
+                <li><img src="{% static 'img/cannondale-3.svg' %}"></li>
+
+                <li><img src="{% static 'img/pinarello-1.svg' %}"></li>
+
+                <li><img src="{% static 'img/cervelo-1.svg' %}"></li>
+
+                <li><img src="{% static 'img/colnago-logo-1.svg' %}"></li>
+
+            </ul>
+
+        </div>
+
+    </section>
+
+
+    <!-- PRODUTOS -->
+
+    <section id="produtos" class="container produtos">
+
+        <h2 class="section-title">Nossos Produtos</h2>
+
+        <div class="produtos-grid">
+
+            {% if page_obj %}
+            {% for produto in page_obj %}
+
+            <div class="product-card">
+
+                <a href="{% url 'products:product_detail' produto.slug %}">
+
+                    {% if produto.image %}
+                    <img src="{{ produto.image.url }}" class="product-img">
+                    {% else %}
+                    <img src="{% static 'img/not-found.jpg' %}" class="product-img">
+                    {% endif %}
+
+                </a>
+
+                <div class="product-info">
+
+                <span class="product-category">
+                    {{ produto.category|title }}
+                </span>
+
+                    <h3 class="product-name">
+                        {{ produto.name }}
+                    </h3>
+
+                    <p class="product-specs">
+                        {{ produto.color }} • {{ produto.year }}
+                    </p>
+
+                    <div class="product-bottom">
+
+                        <div class="price-box">
+                            <span class="currency">R$</span>
+                            <span class="product-price">
+            {{ produto.price }}
+        </span>
+                        </div>
+
+                        <a href="#" class="btn-buy">
+                            <i class="fa fa-shopping-cart"></i>
+                            Comprar
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+            {% endif %}
+
+        </div>
+
+    </section>
 
 </main>
 

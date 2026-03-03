@@ -2,31 +2,45 @@
 {% load static %}
 {% block content %}
 
-
 <div class="perfil-bg d-flex align-items-center cadastro-fundo">
     <div class="container">
         <div class="row justify-content-center">
 
-            <div class="col-md-6 my-5 perfil-card">
+            <div class="col-md-6 my-5 perfil-card p-4">
 
-                <h2 class="text-center mb-5 perfil-titulo">Meu Perfil</h2>
+                <h2 class="text-center mb-4 perfil-titulo">Meu Perfil</h2>
+
+                <!-- Foto do usuário -->
+                {% if user.profile.avatar %}
+                    <div class="text-center mb-3">
+                        <img src="{{ user.profile.avatar.url }}"
+                             class="rounded-circle"
+                             width="120"
+                             height="120">
+                    </div>
+                {% endif %}
 
                 <form action="{% url 'users:profile' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
 
-                    <h5 class="mt-3">Dados do Usuário</h5>
+                    <hr>
+
+                    <h5 class="mt-3">Dados da Conta</h5>
                     {{ user_form.as_p }}
 
-                    <h5 class="mt-4">Informações Pessoais</h5>
+                    <hr>
+
+                    <h5 class="mt-3">Informações Pessoais</h5>
                     {{ profile_form.as_p }}
 
-                    <button type="submit" class="btn btn-primary btn-block mt-4">
+                    <button type="submit" class="btn btn-primary w-100 mt-4">
                         Atualizar Dados
                     </button>
+
                 </form>
 
-                <div class="text-center mt-3">
-                    <a href="{% url 'users:change_password' %}" class="btn btn-secondary">
+                <div class="text-center mt-4">
+                    <a href="{% url 'users:change_password' %}" class="btn btn-outline-secondary">
                         Trocar senha
                     </a>
                 </div>

@@ -2,27 +2,54 @@
 {% load static %}
 {% block content %}
 
-<div class="cadastro-fundo">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 p-5 my-5 bg-light rounded">
-                <h2 class="text-center mb-5">Cadastre-se</h2>
-                <form action="{% url 'users:register' %}" method="POST">
-                    {% csrf_token %}
+<section class="register-section">
 
-                    {{ form.as_p }}
-                    <br><br />
-                    <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
-                </form>
+    <div class="register-container">
+
+        <h2 class="text-center mb-4">Criar Conta</h2>
+
+        <form method="POST" action="{% url 'users:register' %}">
+            {% csrf_token %}
+
+            {% for field in form.visible_fields %}
+
+            <div class="form-group">
+
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+
+                {{ field }}
+
+                {% if field.errors %}
+                <small class="text-danger">
+                    {{ field.errors }}
+                </small>
+                {% endif %}
+
             </div>
+
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary w-100 register-btn">
+                Criar Conta
+            </button>
+
+        </form>
+
+        <div class="register-extra">
+
+            <p>
+                Já possui conta?
+                <a href="{% url 'users:login' %}">
+                    Fazer login
+                </a>
+            </p>
+
         </div>
+
     </div>
-</div>
-<!-- Include Bootstrap JS and jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
+</section>
 
 {% endblock %}

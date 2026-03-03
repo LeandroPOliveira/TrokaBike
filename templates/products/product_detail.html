@@ -2,63 +2,144 @@
 {% load static %}
 {% block content %}
 
-        <div class="container my-5">
-            <div class="row">
-                <div class="col-md-8">
-                    {% if product.image %}
-            <img class="img-fluid" src="{{ product.image.url }}">
-        {% else %}
+<section class="container product-detail">
+
+    <div class="product-detail-grid">
+
+        <!-- IMAGEM -->
+
+        <div class="product-detail-image">
+
+            {% if product.image %}
+            <img src="{{ product.image.url }}" class="product-main-image">
+            {% else %}
             <div class="no-image">
                 🚲 Imagem não disponível
             </div>
-        {% endif %}
-        </div>
-        <div class="col-md-4">
-            <h2>{{ product.name }}</h2>
-            <p><strong>Categoria:</strong> {{ product.category }}</p>
-            <p><strong>Cor:</strong> {{ product.color }}</p>
-            <p><strong>Preço:</strong> {{ product.price }}</p>
-            <p><strong>Descrição:</strong> {{ product.description }}</p>
-            <div class="col-md-2">Quantidade:</div>
+            {% endif %}
 
-            <select class="form-select form-select-sm" id="qty-cart">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-            <br>
-            <button type="button" value="{{ product.id }}" class="btn btn-secondary" id="add-cart">Adicionar ao carrinho</button>
+        </div>
+
+
+        <!-- INFORMAÇÕES -->
+
+        <div class="product-detail-info">
+
+            <span class="product-category-tag">
+                {{ product.category|title }}
+            </span>
+
+            <h1 class="product-title">
+                {{ product.name }}
+            </h1>
+
+            <div class="product-price-box">
+
+                <span class="currency">R$</span>
+
+                <span class="product-detail-price">
+                    {{ product.price }}
+                </span>
+
+            </div>
+
+
+            <div class="product-specs">
+
+                <p><strong>Cor:</strong> {{ product.color }}</p>
+
+                <p><strong>Categoria:</strong> {{ product.category }}</p>
+
+            </div>
+
+
+            <div class="product-description">
+
+                <p>
+                    {{ product.description }}
+                </p>
+
+            </div>
+
+
+            <!-- QUANTIDADE -->
+
+            <div class="product-buy">
+
+                <label>Quantidade</label>
+
+                <select class="form-select qty-select" id="qty-cart">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <div id="cart-message" class="cart-message" style="display:none;">
+                    ✅ Produto adicionado ao carrinho
+                </div>
+                <button
+                        type="button"
+                        value="{{ product.id }}"
+                        class="btn-add-cart add-cart">
+
+                    🛒 Adicionar ao carrinho
+
+                </button>
+
+            </div>
+
         </div>
 
     </div>
-</div>
+
+</section>
+
 
 <script>
-    // Check if button pressed
-    $(document).on('click', '#add-cart', function (e) {
-        e.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: '{% url "cart_add" %}',
-            data: {
-                product_id: $(this).val(),
-                product_qty: $('#qty-cart option:selected').text(),
-                csrfmiddlewaretoken: '{{ csrf_token }}',
-                action: 'post'
-            },
-            success: function (json) {
-                console.log(json);
-                document.getElementById('cart_quantity').textContent = json.qty
-                location.reload();
-            },
-            error: function (xhr, errmsg, err) {
-            }
-        });
-    })
+
+    $(document).on('click', '.add-cart', function (e) {
+
+      e.preventDefault();
+
+      var productid = $(this).val();
+      var qty = $('#qty-cart').val();
+
+      $.ajax({
+          type: 'POST',
+          url: '{% url "cart_add" %}',
+          data: {
+              product_id: productid,
+              product_qty: qty,
+              csrfmiddlewaretoken: '{{ csrf_token }}',
+              action: 'post'
+          },
+
+          success: function (json) {
+
+      $('#cart_quantity').text(json.qty);
+
+      const toast = document.getElementById("cart-toast");
+
+      toast.classList.add("show");
+
+      setTimeout(function(){
+          toast.classList.remove("show");
+      },2000);
+
+  },
+
+          error: function (xhr) {
+
+              console.log(xhr.responseText);
+
+          }
+
+      });
+
+  });
 
 </script>
-
 
 {% endblock %}

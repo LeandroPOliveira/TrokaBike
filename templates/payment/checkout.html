@@ -3,68 +3,99 @@
 
 {% block content %}
 
-<!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Checkout</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Confira seu Pedido...</p>
-        </div>
-    </div>
-</header>
-<br/>
-<div class="container">
+<div class="container mt-4">
+    <h2>Checkout</h2>
+</div>
+
+<div class="container checkout-container">
+
     <div class="row">
 
-        <div class="col-md-6 offset-md-3">
-            <div class="card">
+        <!-- RESUMO DO PEDIDO -->
+
+        <div class="col-lg-5">
+
+            <div class="card checkout-summary">
+
                 <div class="card-header">
-                    Resumo do Pedido
+                    🧾 Resumo do Pedido
                 </div>
+
                 <div class="card-body">
+
                     {% for item in cart_items %}
                     {% with product=item.product %}
-                    {{ product.name }}:
-                    {% if product.is_sale %}
-                    ${{ product.sale_price }}
-                    {% else %}
-                    ${{ product.price }}
-                    {% endif %}
 
-                    <br/>
-                    <small>Quantidade: {{ item.quantity }}</small>
-                    <br/><br/>
+                    <div class="checkout-product">
+
+                        <strong>{{ product.name }}</strong>
+
+                        <span>
+                        {% if product.is_sale %}
+                            ${{ product.sale_price }}
+                        {% else %}
+                            ${{ product.price }}
+                        {% endif %}
+                        </span>
+
+                        <small>Quantidade: {{ item.quantity }}</small>
+
+                    </div>
+
                     {% endwith %}
                     {% endfor %}
-                    Total: ${{ total }}
-                    <br/><br/>
-                    <a href="{% url 'cart_detail' %}" class="btn btn-sm btn-outline-secondary">Atualizar Itens</a>
+
+                    <hr>
+
+                    <h5 class="checkout-total">
+                        Total: ${{ total }}
+                    </h5>
+
+                    <a href="{% url 'cart_detail' %}"
+                       class="btn btn-sm btn-outline-secondary">
+                        Atualizar Carrinho
+                    </a>
+
                 </div>
+
             </div>
-            <br/><br/>
+
+        </div>
+
+
+        <!-- FORMULÁRIO -->
+
+        <div class="col-lg-7">
+
             <form method="POST">
                 {% csrf_token %}
 
-                <div class="card">
+                <div class="card checkout-form">
+
                     <div class="card-header">
-                        Shipping Info
+                        📦 Informações de Entrega
                     </div>
+
                     <div class="card-body">
+
                         {{ form.as_p }}
+
                     </div>
+
                 </div>
 
                 <br>
 
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-success checkout-btn">
                     Finalizar Pedido
                 </button>
+
             </form>
 
-
         </div>
-    </div>
-</div>
 
+    </div>
+
+</div>
 
 {% endblock %}
